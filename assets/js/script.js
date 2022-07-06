@@ -4,15 +4,22 @@ let timerInfo = document.getElementById('timer-readout');
 let inputCharacter = document.getElementById('input-character');
 let guessStatus = document.getElementById('guess-status');
 let timeInGame = document.getElementById('timer-readout');
+let stats = document.getElementById('stats');
 
 //section:global variables go here 👇
-let count = 10;
-let win = [];
+let count = 3;
+let wordGuess = [];
 let countDownTime;
+let winCount = 0;
+let lossCount = 0;
 
 //section:event listeners go here 👇
 playGameButton.addEventListener('click', playGame);
 inputCharacter.addEventListener('input', getInput);
+window.onload = function() {
+  winCount = localStorage.getItem('winCount');
+  lossCount = localStorage.getItem('lossCount');
+}
 
 //section:functions and event handlers go here 👇
 timeInGame.innerText = `Time in Game: ${count} second(s)`;
@@ -34,7 +41,10 @@ function gameTimer() {
         console.log('Game over');
         guessStatus.innerText = "Game Over. Out of Time. You Lost!"
         inputCharacter.setAttribute('disabled', 'true');
-        count = 10
+        lossCount++;
+        stats.innerText = `Wins = ${winCount}, Losses = ${lossCount}`;
+        storeStats();
+        count = 3;
         // timeInGame.innerText = `Time in Game: ${count} seconds`;
       }
     }, 1000);
@@ -63,9 +73,9 @@ function checkInput(guess) {
 
     if (word.charAt(i) === guess) {
       document.querySelectorAll('li')[i].innerText = guess;
-      win[i] = guess;
+      wordGuess[i] = guess;
     }
-    console.log(win);
+    console.log(wordGuess);
     // inputCharacter.value = null;
   }
 
@@ -73,16 +83,24 @@ function checkInput(guess) {
 }
 
 function determineWin(word, guess) {
-  console.log(win)
-  if (win.join('') === word) {
-    console.log('you win', win.length, word.length)
+  console.log(wordGuess)
+  if (wordGuess.join('') === word) {
+    console.log('you win', wordGuess.length, word.length)
     inputCharacter.setAttribute('disabled', 'true');
     inputCharacter.value = null;
     guessStatus.innerText = "You win with " + count + " second(s) to spare!!"
     clearInterval(countDownTime);
     // timeInGame.innerText = `Time in Game: ${count} seconds`;
-    count = 10;
+    winCount++;
+    stats.innerText = `Wins = ${winCount}, Losses = ${lossCount}`;
+    storeStats();
+    count = 3;
     return;
   } 
+}
 
+function storeStats() {
+  localStorage.setItem('winCount', winCount);
+  localStorage.setItem('lossCount', lossCount);
+  // const cat = localStorage.getItem('myCat');
 }
