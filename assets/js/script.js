@@ -7,7 +7,7 @@ let timeInGame = document.getElementById('timer-readout');
 let stats = document.getElementById('stats');
 
 //section:global variables go here 👇
-let count = 3;
+let count = 5;
 let wordGuess = [];
 let countDownTime;
 let winCount = 0;
@@ -16,9 +16,14 @@ let lossCount = 0;
 //section:event listeners go here 👇
 playGameButton.addEventListener('click', playGame);
 inputCharacter.addEventListener('input', getInput);
+
 window.onload = function() {
+  console.log(localStorage.getItem('winCount'))
   winCount = localStorage.getItem('winCount');
+  console.log(winCount);
   lossCount = localStorage.getItem('lossCount');
+  console.log(lossCount);
+  stats.innerText = `Wins = ${winCount}, Losses = ${lossCount}`;
 }
 
 //section:functions and event handlers go here 👇
@@ -44,7 +49,7 @@ function gameTimer() {
         lossCount++;
         stats.innerText = `Wins = ${winCount}, Losses = ${lossCount}`;
         storeStats();
-        count = 3;
+        count = 5;
         // timeInGame.innerText = `Time in Game: ${count} seconds`;
       }
     }, 1000);
@@ -94,7 +99,7 @@ function determineWin(word, guess) {
     winCount++;
     stats.innerText = `Wins = ${winCount}, Losses = ${lossCount}`;
     storeStats();
-    count = 3;
+    count = 5;
     return;
   } 
 }
