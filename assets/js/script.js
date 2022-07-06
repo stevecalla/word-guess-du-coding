@@ -2,6 +2,7 @@
 let playGameButton = document.getElementById('playGame');
 let timerInfo = document.getElementById('timer-readout');
 let inputCharacter = document.getElementById('input-character');
+let guessStatus = document.getElementById('guess-status');
 
 //section:global variables go here 👇
 
@@ -40,6 +41,16 @@ function getInput() {
 function checkInput(guess) {
   let word = 'guess';
   for (let i = 0; i < word.length; i++) {
+    guess === '' ? console.log(null) : guess;
+
+    if (guess === '') {
+      guessStatus.innerText = null;
+    } else if (word.includes(guess)) {
+      guessStatus.innerText = "Good guess";
+    } else {
+      guessStatus.innerText = "No luck. Try again";
+    }
+
     if (word.charAt(i) === guess) {
       console.log('yes');
       document.querySelectorAll('li')[i].innerText = guess;
