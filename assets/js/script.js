@@ -39,9 +39,13 @@ function getInput() {
 
 function checkInput(guess) {
   let word = 'guess';
-  if (word.includes(guess)) {
-    console.log('yes');
-  } else {
-    console.log('no');
+  for (let i = 0; i < word.length; i++) {
+    if (word.charAt(i) === guess) {
+      console.log('yes');
+      document.querySelectorAll('li')[i].innerText = guess;
+    } else {
+      console.log('no');
+    }
+    // inputCharacter.value = null;
   }
 }
