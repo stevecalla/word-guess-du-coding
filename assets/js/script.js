@@ -1,11 +1,13 @@
 //section:query selector variables go here 👇
 let playGameButton = document.getElementById('playGame');
-let timerInfo = document.getElementById('timer-readout')
+let timerInfo = document.getElementById('timer-readout');
+let inputCharacter = document.getElementById('input-character');
 
 //section:global variables go here 👇
 
 //section:event listeners go here 👇
 playGameButton.addEventListener('click', playGame);
+inputCharacter.addEventListener('input', getInput);
 
 //section:functions and event handlers go here 👇
 function playGame() {
@@ -26,4 +28,20 @@ function gameTimer() {
         console.log('Game over');
       }
     }, 1000);
+}
+
+function getInput() {
+  console.log(inputCharacter.value);
+  let guess = inputCharacter.value;
+  //check input
+  checkInput(guess);
+}
+
+function checkInput(guess) {
+  let word = 'guess';
+  if (word.includes(guess)) {
+    console.log('yes');
+  } else {
+    console.log('no');
+  }
 }
