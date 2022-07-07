@@ -49,7 +49,7 @@ timeInGame.innerText = `Time in Game: ${count} second(s)`;
 
 function playGame() {
   if (count === 5) {
-    inputCharacter.removeAttribute('disabled', 'true');
+    inputCharacter.removeAttribute('disabled');
     inputCharacter.focus();
     console.log('Ready to play');
     timeInGame.innerText = `Time in Game: ${count} second(s)`;
@@ -76,12 +76,12 @@ function gameTimer() {
       if (count > 0) {
         count--;
         timeInGame.innerText = `Time in Game: ${count} second(s)`;
-        inputCharacter.removeAttribute('disabled', 'false');
+        inputCharacter.removeAttribute('disabled');
       } else {
         clearInterval(countDownTime);
         // console.log('Game over');
         guessStatus.innerText = "Game Over. Out of Time. You Lost!"
-        inputCharacter.setAttribute('disabled', 'true');
+        inputCharacter.setAttribute('disabled', '');
         lossCount++;
         stats.innerText = `Wins = ${winCount}, Losses = ${lossCount}`;
         storeStats();
