@@ -8,12 +8,12 @@ let stats = document.getElementById("stats");
 let wordStructure = document.getElementById("word");
 
 //section:global variables go here 👇
-let count = 5;
+let count = 30;
 let wordGuess = [];
 let countDownTime;
 let winCount = 0;
 let lossCount = 0;
-let words = ["event", "javascript", "html", "coding"];
+let words = ["event", "javascript", "html", "coding", 'node', 'prettier', 'vscode', 'script', 'stylesheet', 'button', 'id', 'class', 'variable', 'eventlistener', 'function', 'method', 'class', 'body', 'header', 'element', 'main', 'anchor', 'tag', 'property'];
 let word;
 
 //section:event listeners go here 👇
@@ -46,7 +46,7 @@ window.onload = function () {
 timeInGame.innerText = `Time in Game: ${count} second(s)`;
 
 function playGame() {
-  if (count === 5) {
+  if (count === 30) {
     inputCharacter.removeAttribute("disabled");
     inputCharacter.focus();
     console.log("Ready to play");
@@ -85,8 +85,10 @@ function gameTimer() {
       stats.innerText = `Wins = ${winCount}, Losses = ${lossCount}`;
       storeStats();
 
+      wordGuess = [];
+
       playGameButton.focus();
-      count = 5;
+      count = 30;
       // timeInGame.innerText = `Time in Game: ${count} seconds`;
     }
   }, 1000);
@@ -96,10 +98,11 @@ function getInput(event) {
   // console.log(inputCharacter.value);
   // let guess = inputCharacter.value;
   // event.preventDefault();
-  inputCharacter.innerText = event.key;
+  inputCharacter.value = event.key;
   console.log(inputCharacter.value)
   let guess = event.key.toLowerCase();
   let guessCode = event.keyCode;
+  console.log(guess, guessCode);
   checkInput(guess, guessCode);
   // console.log(event.key, event.code, event.keyCode);
 
@@ -115,9 +118,9 @@ function checkInput(guess, guessCode) {
   for (let i = 0; i < word.length; i++) {
     // guess === '' ? console.log(null) : guess;
 
-    if (guess === "" || (guessCode >= 65 && guessCode <= 90)) {
+    if (guess === "" || guessCode === 35 || guessCode < 65 || guessCode > 90) {
       inputCharacter.value = '';
-      // guessStatus.innerText = null;
+      guessStatus.innerText = null;
     } else if (word.includes(guess)) {
       guessStatus.innerText = "Good guess";
     } else {
@@ -126,6 +129,7 @@ function checkInput(guess, guessCode) {
 
     if (word.charAt(i) === guess) {
       document.querySelectorAll("li")[i].innerText = guess;
+      document.querySelectorAll("li")[i].style.borderBottom = "5px solid green";
       wordGuess[i] = guess;
     }
     // console.log(wordGuess);
@@ -136,23 +140,22 @@ function checkInput(guess, guessCode) {
 }
 
 function determineWin(word, guess) {
-  // console.log(wordGuess)
+  console.log(wordGuess)
   if (wordGuess.join("") === word) {
-    // console.log('you win', wordGuess.length, word.length)
-
+    console.log('you win', wordGuess, wordGuess.length, word.length)
     inputCharacter.value = '';
     inputCharacter.setAttribute("disabled", "true");
-    inputCharacter.value = null;
+    // inputCharacter.value = null;
     guessStatus.innerText = "You win with " + count + " second(s) to spare!!";
     clearInterval(countDownTime);
-    // timeInGame.innerText = `Time in Game: ${count} seconds`;
     winCount++;
     stats.innerText = `Wins = ${winCount}, Losses = ${lossCount}`;
     storeStats();
-    count = 5;
+    count = 30;
     playGameButton.focus();
-    inputCharacter.innerText = '';
-    inputCharacter.value = '';
+    // inputCharacter.innerText = '';
+    // inputCharacter.value = '';
+    wordGuess = [];
     return;
   }
 }

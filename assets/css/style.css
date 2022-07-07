@@ -1,5 +1,5 @@
 * {
-  border: 1px solid red;
+  border: 1px solid black;
 }
 
 .word {
@@ -11,8 +11,10 @@
 }
 
 .word li {
+  width: 14px;
+  height: 14px;
   margin: 5px;
   padding: 10px;
   text-align: center;
-  border-bottom: 5px solid blue;
+  border-bottom: 5px solid red;
 }
