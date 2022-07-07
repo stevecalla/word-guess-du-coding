@@ -33,6 +33,7 @@ window.onload = function() {
   word = words[randomNum];
 
 
+  // inputCharacter.focus();
   wordStructure.innerHTML = "";
   for (let i = 0; i < word.length; i++) {
     wordStructure.innerHTML += `
@@ -48,6 +49,8 @@ timeInGame.innerText = `Time in Game: ${count} second(s)`;
 
 function playGame() {
   if (count === 5) {
+    inputCharacter.removeAttribute('disabled', 'true');
+    inputCharacter.focus();
     console.log('Ready to play');
     timeInGame.innerText = `Time in Game: ${count} second(s)`;
     
