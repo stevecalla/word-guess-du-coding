@@ -13,7 +13,32 @@ let wordGuess = [];
 let countDownTime;
 let winCount = 0;
 let lossCount = 0;
-let words = ["event", "javascript", "html", "coding", 'node', 'prettier', 'vscode', 'script', 'stylesheet', 'button', 'id', 'class', 'variable', 'eventlistener', 'function', 'method', 'class', 'body', 'header', 'element', 'main', 'anchor', 'tag', 'property'];
+let words = [
+  "event",
+  "javascript",
+  "html",
+  "coding",
+  "node",
+  "prettier",
+  "vscode",
+  "script",
+  "stylesheet",
+  "button",
+  "id",
+  "class",
+  "variable",
+  "eventlistener",
+  "function",
+  "method",
+  "class",
+  "body",
+  "header",
+  "element",
+  "main",
+  "anchor",
+  "tag",
+  "property",
+];
 let word;
 
 //section:event listeners go here 👇
@@ -79,7 +104,7 @@ function gameTimer() {
       // console.log('Game over');
       guessStatus.innerText = "Game Over. Out of Time. You Lost!";
 
-      inputCharacter.value = '';
+      inputCharacter.value = "";
       inputCharacter.setAttribute("disabled", "");
       lossCount++;
       stats.innerText = `Wins = ${winCount}, Losses = ${lossCount}`;
@@ -99,7 +124,7 @@ function getInput(event) {
   // let guess = inputCharacter.value;
   // event.preventDefault();
   inputCharacter.value = event.key;
-  console.log(inputCharacter.value)
+  console.log(inputCharacter.value);
   let guess = event.key.toLowerCase();
   let guessCode = event.keyCode;
   console.log(guess, guessCode);
@@ -107,7 +132,6 @@ function getInput(event) {
   // console.log(event.key, event.code, event.keyCode);
 
   // inputCharacter.setAttribute('value', null)
-
 }
 
 function checkInput(guess, guessCode) {
@@ -119,7 +143,7 @@ function checkInput(guess, guessCode) {
     // guess === '' ? console.log(null) : guess;
 
     if (guess === "" || guessCode === 35 || guessCode < 65 || guessCode > 90) {
-      inputCharacter.value = '';
+      inputCharacter.value = "";
       guessStatus.innerText = null;
     } else if (word.includes(guess)) {
       guessStatus.innerText = "Good guess";
@@ -140,10 +164,10 @@ function checkInput(guess, guessCode) {
 }
 
 function determineWin(word, guess) {
-  console.log(wordGuess)
+  console.log(wordGuess);
   if (wordGuess.join("") === word) {
-    console.log('you win', wordGuess, wordGuess.length, word.length)
-    inputCharacter.value = '';
+    console.log("you win", wordGuess, wordGuess.length, word.length);
+    inputCharacter.value = "";
     inputCharacter.setAttribute("disabled", "true");
     // inputCharacter.value = null;
     guessStatus.innerText = "You win with " + count + " second(s) to spare!!";
